@@ -6,12 +6,8 @@ import uk.gov.hmcts.contino.Environment
 
 Environment environment = new Environment(env)
 
-onMaster {
-  sharedInfrastructurePipeline('rpx', environment.nonProdName, 'nonprod')
-  sharedInfrastructurePipeline('rpx', environment.demoName, 'nonprod')
-  sharedInfrastructurePipeline('rpx', environment.prodName, 'prod')
-}
+@Library("Infrastructure") _
 
-onHMCTSDemo {
-  sharedInfrastructurePipeline('rpx', environment.hmctsDemoName, 'hmctsdemo')
+withInfraPipeline("rpx") {
+  enableSlackNotifications("#rpa-pipeline")
 }
